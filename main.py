@@ -3,29 +3,44 @@ from search_algorithms.binary_search import binary_search
 from search_algorithms.ternary_search import ternary_search
 from metrics.measure_time import measure_time
 from data_generator.generate_data import generate_data
+from graphs.graph import create_graph
+import pandas as pd
 
 def main():
-    array_size = 1000000
-    target_element = 0
+    array_size = [100, 500, 2000, 5000, 10000, 20000, 40000, 60000, 80000, 100000]
+    target_element = [0, 1, 2, 100]
+    results = []
+    
+    for target in target_element:
+        for array in array_size:
+            
+            # Generate and sort data
+            data_array = generate_data(array)
+            data_array.sort()
 
-    # Generate and sort data
-    data_array = generate_data(array_size)
-    data_array.sort()
+            iteration = []
+            iteration.append(target)
+            iteration.append(array)
+            
+            # Linear Search
+            result_linear, time_linear = measure_time(linear_search, data_array, target)
+            #print(f"Linear Search Result: {result_linear}, Time: {time_linear:.2f} microseconds")
+            iteration.append(time_linear)
 
-    # Linear Search
-    result_linear, time_linear = measure_time(linear_search, data_array, target_element)
-    print(f"Linear Search Result: {result_linear}, Time: {time_linear:.2f} microseconds")
+            # Binary Search
+            result_binary, time_binary = measure_time(binary_search, data_array, target)
+            #print(f"Binary Search Result: {result_binary}, Time: {time_binary:.2f} microseconds")
+            iteration.append(time_binary)
 
-    # Binary Search
-    result_binary, time_binary = measure_time(binary_search, data_array, target_element)
-    print(f"Binary Search Result: {result_binary}, Time: {time_binary:.2f} microseconds")
+            # Ternary Search
+            result_ternary, time_ternary = measure_time(ternary_search, data_array, target)
+            #print(f"Ternary Search Result: {result_ternary}, Time: {time_ternary:.2f} microseconds")
+            iteration.append(time_ternary)
+            results.append(iteration)
 
-    # Ternary Search
-    result_ternary, time_ternary = measure_time(ternary_search, data_array, target_element)
-    print(f"Ternary Search Result: {result_ternary}, Time: {time_ternary:.2f} microseconds")
+    df = pd.DataFrame(results)
+    print(df)
+    create_graph(results=results, graphs=len(target_element), target_element=target_element)
 
 if __name__ == '__main__':
     main()
-
-## Generar combinaciones con diferentes target element y diferentes tamaños de array. (Variar en tamaños de mil en mil, capturar tiempos, generar tabla de cuatro columnas, tiempos.)
-## Promediar los tiempos para tener un dato más representativo.

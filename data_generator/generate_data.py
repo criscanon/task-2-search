@@ -10,4 +10,4 @@ def generate_data(size):
     Returns:
         list: A list of random integers.
     """
-    return [random.randint(1, 1000) for _ in range(size)]
+    return [random.randint(1, 100) for _ in range(size)]

@@ -12,7 +12,7 @@ def ternary_search(arr, target):
     low, high = 0, len(arr) - 1
     
     while low <= high:
-        print(low, high, target)
+        
         mid1 = low + (high - low) // 3
         mid2 = high - (high - low) // 3
         
