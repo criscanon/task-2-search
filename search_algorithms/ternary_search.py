@@ -28,3 +28,5 @@ def ternary_search(arr, target):
             low, high = mid1 + 1, mid2 - 1
     
     return -1
+
+# Complexity O(log n)

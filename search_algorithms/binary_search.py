@@ -21,3 +21,5 @@ def binary_search(arr, target):
             high = mid - 1
     
     return -1
+
+# Complexity O(log n)

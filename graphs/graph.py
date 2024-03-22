@@ -25,7 +25,7 @@ def create_graph(results, graphs, target_element):
     for i, ax in enumerate(axes.flat):
         if i < graphs:
             df = dfs[i]
-            #ax.plot(df[1], df[2], label='linear_search')
+            ax.plot(df[1], df[2], label='linear_search')
             ax.plot(df[1], df[3], label='binary_search')
             ax.plot(df[1], df[4], label='ternary_search')
             ax.set_title(target_element[i])
